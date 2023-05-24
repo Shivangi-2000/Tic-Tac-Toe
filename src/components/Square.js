@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-
+import classes from "../App.module.css"
 export default function Square({ value, onSquareClick }) {
     //const [value, setValue] = useState(null);
 
@@ -8,7 +8,7 @@ export default function Square({ value, onSquareClick }) {
 //   }
   return (
     <button
-      className="square"
+      className={classes.square}
       onClick={onSquareClick}
     >
       {value}
