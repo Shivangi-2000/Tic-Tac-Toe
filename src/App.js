@@ -1,5 +1,7 @@
 import classes from "./App.module.css";
 import Square from "./components/Square";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrophy } from '@fortawesome/free-solid-svg-icons'
 import { useState } from "react";
 
 function culateWinner(squares) {
@@ -29,11 +31,19 @@ function App() {
   const winner = culateWinner(squares);
   let status;
   if (winner) {
-    status = <b>Winner: <br></br> {winner}</b>;
+    status = (
+      <b>
+        Winner <FontAwesomeIcon icon={faTrophy} /> <br></br> {winner}
+      </b>
+    );
   } else if (squares.includes(null)) {
-    status = <b><br></br> {xIsNext ? "X" : "O"}</b>;
+    status = (
+      <b>
+       <br></br>  {xIsNext ? "X" : "O"}
+      </b>
+    );
   } else {
-    status = <b>Sorry! Its a tie</b>;
+    status = <b><br></br>Sorry! Its a tie</b>;
   }
 
   function handleClick(i) {
@@ -50,42 +60,73 @@ function App() {
     setXIsNext(!xIsNext);
   }
 
-  const reset = ()=>{
+  const reset = () => {
     setSquares(Array(9).fill(null));
-  }
+  };
   return (
-    <div className={classes.row}>
-      <div className={classes.column}></div>
-      <div className={classes.column}>
-        <br></br>
-        <div className={classes.status}>{status}</div>
-        <br></br>
-        <div className={classes.board}>
-        <div className={classes.row}>
-          <div className={classes.column1}>
-            <Square value={squares[0]} onSquareClick={() => handleClick(0)} />
-            <Square value={squares[1]} onSquareClick={() => handleClick(1)} />
-            <Square value={squares[2]} onSquareClick={() => handleClick(2)} />
+    <>
+      <div className={classes.row}>
+        <div className={classes.column}></div>
+        <div className={classes.column}>
+         
+          <div className={classes.status}>{status}</div>
+          <br></br>
+          <div className={classes.board}>
+            <div className={classes.row}>
+              <div className={classes.column1}>
+                <Square
+                  value={squares[0]}
+                  onSquareClick={() => handleClick(0)}
+                />
+                <Square
+                  value={squares[1]}
+                  onSquareClick={() => handleClick(1)}
+                />
+                <Square
+                  value={squares[2]}
+                  onSquareClick={() => handleClick(2)}
+                />
+              </div>
+              {/* <br></br> */}
+              <div className={classes.column1}>
+                <Square
+                  value={squares[3]}
+                  onSquareClick={() => handleClick(3)}
+                />
+                <Square
+                  value={squares[4]}
+                  onSquareClick={() => handleClick(4)}
+                />
+                <Square
+                  value={squares[5]}
+                  onSquareClick={() => handleClick(5)}
+                />
+              </div>
+              {/* <br></br> */}
+              <div className={classes.column1}>
+                <Square
+                  value={squares[6]}
+                  onSquareClick={() => handleClick(6)}
+                />
+                <Square
+                  value={squares[7]}
+                  onSquareClick={() => handleClick(7)}
+                />
+                <Square
+                  value={squares[8]}
+                  onSquareClick={() => handleClick(8)}
+                />
+              </div>
+            </div>
           </div>
-          {/* <br></br> */}
-          <div className={classes.column1}>
-            <Square value={squares[3]} onSquareClick={() => handleClick(3)} />
-            <Square value={squares[4]} onSquareClick={() => handleClick(4)} />
-            <Square value={squares[5]} onSquareClick={() => handleClick(5)} />
-          </div>
-          {/* <br></br> */}
-          <div className={classes.column1}>
-            <Square value={squares[6]} onSquareClick={() => handleClick(6)} />
-            <Square value={squares[7]} onSquareClick={() => handleClick(7)} />
-            <Square value={squares[8]} onSquareClick={() => handleClick(8)} />
-          </div>
+          <br></br>
+          <button className={classes.playAgain} onClick={reset}>
+            Play Again!
+          </button>
         </div>
-        </div><br></br>
-        <button className={classes.playAgain} onClick={reset}>Play Again!</button>
+        <div className={classes.column}></div>
       </div>
-      <div className={classes.column} ></div>
-      
-    </div>
+    </>
   );
 }
 // export default function Board() {
